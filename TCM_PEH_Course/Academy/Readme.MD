@@ -105,7 +105,7 @@ We can always adapt it to our needs.
 
 Cracked the hash:
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9dbd598d-7e94-428f-b960-b32eeb89a882/442b1981-eab8-4281-b810-27e97fa5d00a/image.png)
+![image.png](/images/image (1).png)
 
 Creds from the note
 
