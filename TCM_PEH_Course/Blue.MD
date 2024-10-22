@@ -75,4 +75,4 @@ Set rhosts and lhost. Set smbuser to guest.
 
 Pwned:
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9dbd598d-7e94-428f-b960-b32eeb89a882/68b48422-7f21-4e9e-848a-28a15a2be315/image.png)
+![image.png](image.png)
