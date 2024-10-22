@@ -67,11 +67,12 @@ Nmap done: 1 IP address (1 host up) scanned in 67.58 seconds
 
 ```
 
-This version of SMB is vulnerable to EternalBlue.
+I googled exploits for Windows 7 Ultimate 7601 Service Pack 1 and found EternalBlue.
 
-Use windows/smb/ms17_010_psexec in metasploit.
+## Exploiting
+I used windows/smb/ms17_010_psexec in metasploit.
 
-Set rhosts and lhost. Set smbuser to guest.
+Set rhosts to 192.168.56.103 and lhost to the kali machine's IP.
 
 Pwned:
 
