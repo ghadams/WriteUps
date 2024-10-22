@@ -105,7 +105,7 @@ We can always adapt it to our needs.
 
 Cracked the hash:
 
-![image.png]('images/image (1).png')
+![image.png](images/image1.png)
 
 Creds from the note
 
