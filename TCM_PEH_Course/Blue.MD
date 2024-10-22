@@ -1,7 +1,7 @@
+# Machine Info
 IP: 192.168.56.103
 
 Set IP in Kali:
-
 ```
 echo 'export IP=192.168.56.103' >> ~/.zshrc
 source ~/.zshrc
