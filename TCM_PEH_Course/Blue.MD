@@ -72,7 +72,7 @@ I googled exploits for Windows 7 Ultimate 7601 Service Pack 1 and found EternalB
 ## Exploiting
 I used windows/smb/ms17_010_psexec in metasploit.
 
-Set rhosts to 192.168.56.103 and lhost to the kali machine's IP.
+Set rhosts to 192.168.56.103 and lhost to my kali machine's IP.
 
 Pwned:
 
