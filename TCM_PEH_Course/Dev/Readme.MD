@@ -72,7 +72,7 @@ Nmap done: 1 IP address (1 host up) scanned in 8.61 seconds
 
 Port 80:
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9dbd598d-7e94-428f-b960-b32eeb89a882/db483102-6659-411a-bc36-1caee5237312/image.png)
+![image.png](image.png)
 
 Dirsearch on port 80:
 
@@ -140,7 +140,7 @@ None of the above findings are especially interesting. They just list some of th
 
 Port 8080:
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9dbd598d-7e94-428f-b960-b32eeb89a882/b66e7a84-998a-40db-849b-59e9de65ad57/image.png)
+![image.png](image1.png)
 
 Dirsearch on port 8080:
 
@@ -188,17 +188,17 @@ Found the bolt login page at http://192.168.56.105:8080/dev/
 
 I created an account with the name ‘t’.
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9dbd598d-7e94-428f-b960-b32eeb89a882/8b5b564c-88cf-4836-b2fd-59db9607589f/image.png)
+![image.png](image2.png)
 
 In the URL, I noticed ‘id=t’ and changed it to ‘id=admin’ then got this message:
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9dbd598d-7e94-428f-b960-b32eeb89a882/4932cfcb-08ca-40a0-ae89-219b81b741da/image.png)
+![image.png](image3.png)
 
 I tried some actions but kept getting denied admin access even after that message. I googled BoltWire exploit and found this github page: https://github.com/Cyber-Wo0dy/CVE-2023-46501
 
 I followed the steps listed there and went to http://192.168.56.105:8080/dev/index.php?p=member.admin&action=data
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9dbd598d-7e94-428f-b960-b32eeb89a882/34ee5b3a-06c9-47fd-846b-f2f880632173/image.png)
+![image.png](image4.png)
 
 Seems like the member.admin user has the password ‘I_love_java”
 
@@ -206,7 +206,7 @@ I was able to log out of my ‘t’ account and log in as admin with that passwo
 
 The version of BoltWire is 6.03
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9dbd598d-7e94-428f-b960-b32eeb89a882/6b4fa48d-a6af-4adf-b53e-8e126ea9e5eb/image.png)
+![image.png](image5.png)
 
 Google shows me there is a local file inclusion exploit for this version of BoltWire: https://www.exploit-db.com/exploits/48411
 
@@ -216,7 +216,7 @@ And it worked when I browsed to
 http://192.168.56.105:8080/dev/index.php?p=action.search&action=../../../../../../../etc/passwd
 ```
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9dbd598d-7e94-428f-b960-b32eeb89a882/dc85f808-f090-4e4d-87e1-d95e04cc16f0/image.png)
+![image.png](image6.png)
 
 
 So we have a user on the server named jeanpaul. I tried checking for a similar user in BoltWire but it didn’t exist.
@@ -227,7 +227,7 @@ I found a page that allows me to upload a file
 http://192.168.56.105:8080/dev/index.php?p=action.upload&action=view
 ```
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9dbd598d-7e94-428f-b960-b32eeb89a882/e0f8c88d-1c2f-4d71-bc72-1e72fdc8f6b8/image.png)
+![image.png](image7.png)
 
 Php files are not allowed currently. However, I found the config page and changed that.
 
@@ -235,7 +235,7 @@ Php files are not allowed currently. However, I found the config page and change
 http://192.168.56.105:8080/dev/index.php?p=site.config&action=edit
 ```
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9dbd598d-7e94-428f-b960-b32eeb89a882/1654a8c1-45d3-4e20-bd0a-ee5cb915368a/image.png)
+![image.png](image8.png)
 
 By uploading payload.php then browsing to http://192.168.56.105:8080/dev/files/payload.php, I was able to get a reverse shell.
 
